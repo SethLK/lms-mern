@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function UserFetch() {
   const [userData, setUserData] = useState([]);
@@ -20,8 +21,9 @@ function UserFetch() {
 
     fetchData();
   }, []);
-  
+
   return (
+    <>
     <div>
       <h2>User Data:</h2>
       <ul>
@@ -30,6 +32,8 @@ function UserFetch() {
         ))}
       </ul>
     </div>
+    <Link to={"/"}>Back</Link>
+    </>
   );
 }
 

@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import UserFetch from "./components/userFetch";
-import CourseFetch from "./components/courseFetch";
+import { Link } from "react-router-dom";
 
-function App(){
-    return(
+function App() {
+    return (
         <>
-        {/* <UserFetch /> */}
-        <CourseFetch />
+            <h1>Home page</h1>
+            <Link to={'courses'}>Courses</Link>
+            <br />
+            <Link to={'users'}>Users</Link>
         </>
-    )
+    );
 }
 
 export default App;

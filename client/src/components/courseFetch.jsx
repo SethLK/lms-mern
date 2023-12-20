@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function CourseFetch(){
     const [courseData, setCourseData] = useState([])
@@ -19,14 +20,17 @@ function CourseFetch(){
         fetchData()
     }, [])
     return(
+        <>
         <div>
             <h2>Course List</h2>
             <ul>
             {courseData.map((course) => (
-                <li key={course._id}>{course.title}</li>
+                <li key={course._id}><Link to={course._id}>{course.title}</Link></li>
             ))}
             </ul>
         </div>
+        <Link to={"/"}>Back</Link>
+        </>
     )
 }
 

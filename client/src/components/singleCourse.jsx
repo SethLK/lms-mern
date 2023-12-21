@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getParam from "../myhooks/getParam";
+import { Link } from "react-router-dom";
 
 async function fetchData(course_id, setCourse) {
     try {
@@ -15,19 +16,43 @@ async function fetchData(course_id, setCourse) {
     }
 }
 
+async function fetchLessons(course_id, setLesson){
+    try{
+        const res = await fetch(`http://localhost:3000/api/courses/${course_id}/lessons`);
+        if(res.ok){
+            const data = await res.json();
+            setLesson(data.lessons); // Assuming the lessons are in a property called 'lessons'
+        } else{
+            console.error("Error fetching Lessons")
+        }
+    }catch(e){
+        console.error("Error fetching lessons data", e)
+    }
+}
+
 function SingleCourse() {
-    const [course, setCourse] = useState([]);
+    const [course, setCourse] = useState({});
+    const [lesson, setLesson] = useState([]); // Initialize as an empty array
     const course_id = getParam('single');
+    const url = getParam("whole")
 
     useEffect(() => {
         fetchData(course_id, setCourse);
+        fetchLessons(course_id, setLesson);
     }, [course_id]);
 
     return (
         <>
             <div>
-                <h1>Title: {course.title}</h1>
-                <p>Description: {course.description} </p>
+                {course && (
+                    <>
+                        <h1>Title: {course.title}</h1>
+                        <p>Description: {course.description} </p>
+                    </>
+                )}
+                {Array.isArray(lesson) && lesson.map((les)=>(
+                    <p key={les._id}><Link to={`${url}/lessons/${les._id}`}>Lesson title: {les.title}</Link></p>
+                ))}
             </div>
         </>
     );

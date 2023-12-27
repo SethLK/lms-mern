@@ -5,10 +5,10 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['student', 'instructor', 'admin', 'staff'] },
-    
-    enrolledCourses: [{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Course' 
+
+    enrolledCourses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
     }],
 });
 

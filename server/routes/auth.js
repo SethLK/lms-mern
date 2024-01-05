@@ -62,7 +62,11 @@ Router.post('/register', async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ success: true, message: "User registered successfully" });
+    res.status(201).json({ 
+      success: true, 
+      message: "User registered successfully",
+      accessToken
+     });
   } catch (err) {
     console.error("Error at registration", err);
     res.status(500).json({ success: false, message: "Internal server error" });

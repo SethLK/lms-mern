@@ -37,8 +37,8 @@ export default function Register() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
+                },
+                body: JSON.stringify({
                     email: email,
                     password: password,
                 }),
@@ -51,7 +51,8 @@ export default function Register() {
                 console.log("Registration successful");
                 setMessage(data.message)
             }else {
-                setMessage(data.message)
+                const errorData = await response.json();
+                setMessage(errorData.message);
                 console.error("Register failed", response.statusText);
              }
         } catch (error) {

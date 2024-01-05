@@ -5,7 +5,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accessToken, setToken] = useState("");
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -32,13 +32,14 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         setToken(data.accessToken);
-        setMessage(data.message)
+        setMessage(data.message);
       } else {
-          setMessage(data.message)
-         console.error("Login failed", response.statusText);
+        const errorData = await response.json();
+        setMessage(errorData.message); // Move setMessage outside the else block
+        console.error("Login failed", response.statusText);
       }
     } catch (error) {
-      
+      setMessage("An error occurred during login");
       console.error("Error during login", error);
     }
   };
@@ -49,7 +50,7 @@ export default function Login() {
 
   return (
     <>
-    <h1>Login</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">
           Email

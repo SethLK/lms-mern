@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const config = require("../config/config");
 
-mongoose.connect('mongodb://127.0.0.1:27017/lms', {
+mongoose.connect(config.mongoKey, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     dbName: 'lms'

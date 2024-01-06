@@ -29,6 +29,11 @@ Router.post('/login', async (req, res) => {
     const accessToken = jwt.sign({ id: user._id, email: user.email }, config.secretKey, { expiresIn: '1h' });
 
     res.status(200).json({
+      user: {
+        username: user.username,
+        email: user.email,
+        role: user.role, // Include the user role in the response
+      },
       success: true,
       message: "Login successful",
       accessToken,
@@ -40,8 +45,9 @@ Router.post('/login', async (req, res) => {
   }
 });
 
+
 Router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -53,16 +59,24 @@ Router.post('/register', async (req, res) => {
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    
     // Create a new user
     const newUser = new User({
+      username,
       email,
       password: hashedPassword,
     });
-
+    
     // Save the user to the database
     await newUser.save();
 
+    const accessToken = jwt.sign({ id: newUser._id, email: newUser.email }, config.secretKey, { expiresIn: '1h' });
+
     res.status(201).json({ 
+      user: {
+        username: newUser.username,
+        email: newUser.email,
+      },
       success: true, 
       message: "User registered successfully",
       accessToken

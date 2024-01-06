@@ -1,0 +1,12 @@
+
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card{
+    border: 2px black solid;
+    padding: 20px;
+}

@@ -21,7 +21,7 @@ async function fetchLessons(course_id, setLesson) {
         const res = await fetch(`http://localhost:3000/api/courses/${course_id}/lessons`);
         if (res.ok) {
             const data = await res.json();
-            setLesson(data); // Assuming the lessons are in a property called 'lessons'
+            setLesson(data); 
         } else {
             console.error("Error fetching Lessons");
         }

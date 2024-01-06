@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
+
 import "./components/navbar"
 import NavBar from "./components/navbar";
+import Home from "./pages/Home";
 
 function App() {
     return (
         <>
-        <NavBar />
-        <div className="body">
-            <h1>Home page</h1>
-            <Link to={'courses'}>Courses</Link>
-            <br />
-            <Link to={'users'}>Users</Link>
-        </div>
+            <NavBar />
+            <div className="body">
+                <Home />
+            </div>
         </>
     );
 }

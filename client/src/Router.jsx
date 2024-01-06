@@ -1,15 +1,15 @@
 import App from "./App";
-
 import UserFetch from "./components/userFetch";
 import CourseFetch from "./components/courseFetch";
 import SingleCourse from "./components/singleCourse";
 import GetLessonByCourse from "./components/getLessonByCourse";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
+import Logout from "./pages/logout";
 
-import {
-    createBrowserRouter
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 const Router = createBrowserRouter([
     {
@@ -29,16 +29,24 @@ const Router = createBrowserRouter([
         element: <GetLessonByCourse />
     },
     {
-        path: "/users",
-        element: <UserFetch />
-    },
-    {
         path: "/login",
         element: <Login />
     },
     {
         path: "/register",
         element: <Register />
+    },
+    {
+        path: "/profile",
+        element: <Profile />
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard />
+    },
+    {
+        path: "/logout",
+        element: <Logout />
     }
 
 ]);

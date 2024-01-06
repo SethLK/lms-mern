@@ -1,12 +1,21 @@
+import { useUser } from "../myhooks/UserContent";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
     const [message, setMessage] = useState("")
+    const [accessToken, setToken] = useState("");
+    const { setUser, userData } = useUser({});
+    const redirect = useNavigate()
+
+    const handleUsername = (e) =>{
+        setUsername(e.target.value)
+    }
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -39,6 +48,7 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    username: username,
                     email: email,
                     password: password,
                 }),
@@ -50,6 +60,8 @@ export default function Register() {
                 // Add your registration logic here
                 console.log("Registration successful");
                 setMessage(data.message)
+                setUser(data.user);
+                redirect("/profile")
             }else {
                 const errorData = await response.json();
                 setMessage(errorData.message);
@@ -61,10 +73,25 @@ export default function Register() {
         }
     };
 
+    useEffect(() => {
+        console.log("User data is", userData); // Log user data here
+        console.log("Token is", accessToken);
+      }, [accessToken, userData]);
+      
     return (
         <>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
+                <label htmlFor="username">
+                    Username
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="username"
+                        value={username}
+                        onChange={handleUsername} />
+                </label>
+                <br />
                 <label htmlFor="email">
                     Email
                     <input

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "../myhooks/UserContent";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const redirect = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accessToken, setToken] = useState("");
   const [message, setMessage] = useState("");
+  const { setUser, userData } = useUser({});
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -33,9 +37,11 @@ export default function Login() {
         const data = await response.json();
         setToken(data.accessToken);
         setMessage(data.message);
+        setUser(data.user);
+        redirect("/profile")
       } else {
         const errorData = await response.json();
-        setMessage(errorData.message); // Move setMessage outside the else block
+        setMessage(errorData.message);
         console.error("Login failed", response.statusText);
       }
     } catch (error) {
@@ -45,8 +51,9 @@ export default function Login() {
   };
 
   useEffect(() => {
-    console.log(`Token is ${accessToken}`);
-  }, [accessToken]);
+    console.log("User data is", userData); // Log user data here
+    console.log("Token is", accessToken);
+  }, [accessToken, userData]);
 
   return (
     <>

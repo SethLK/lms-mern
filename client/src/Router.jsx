@@ -1,6 +1,5 @@
 import App from "./App";
 import UserFetch from "./components/userFetch";
-import CourseFetch from "./components/courseFetch";
 import SingleCourse from "./components/singleCourse";
 import GetLessonByCourse from "./components/getLessonByCourse";
 import Login from "./pages/login";
@@ -8,6 +7,7 @@ import Register from "./pages/register";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Logout from "./pages/logout";
+import Course from "./pages/Course";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/courses",
-        element: <CourseFetch />
+        element: <Course />
     },
     {
         path: "/courses/:course_id",

@@ -30,7 +30,7 @@ export default function Course(){
             <div className="courses">
                 {courses.map((course) => (
                     <CourseCard
-                        key={course.id} // Assuming each course has a unique id
+                        key={course._id} // Assuming each course has a unique id
                         title={course.title}
                         description={course.description}
                         instructor={course.instructor.username}

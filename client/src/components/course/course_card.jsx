@@ -1,6 +1,6 @@
 export default function CourseCard(props){
     return(
-        <div class="custom-card">
+        <div className="custom-card">
             <h3>Title: {props.title}</h3>
             <p>Description: {props.description}</p>
             <p>Instructor: {props.instructor}</p>

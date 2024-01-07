@@ -1,6 +1,7 @@
 import CourseCard from "../components/course/course_card";
 import { useState, useEffect } from "react";
 import "../../public/style/courses/courses.css"
+import NavBar from "../components/navbar"
 
 export default function Course(){
     const [courses, setCourses] = useState([])
@@ -23,17 +24,21 @@ export default function Course(){
     }, [])
     return(
         <>
-            <h1>Courses</h1>
+        <NavBar />
+        <div className="body">
+        <h1>Courses</h1>
             <div className="courses">
                 {courses.map((course) => (
                     <CourseCard
                         key={course.id} // Assuming each course has a unique id
                         title={course.title}
                         description={course.description}
-                        instructor={course.instructor}
+                        instructor={course.instructor.username}
                     />
                     ))}
             </div>
+        </div>
+            
         </>
     )
 }

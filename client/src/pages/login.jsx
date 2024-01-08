@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../myhooks/UserContent";
 import { useNavigate } from "react-router-dom";
+import "./style/login.css";
 
 export default function Login() {
-  const redirect = useNavigate()
+  const redirect = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accessToken, setToken] = useState("");
@@ -38,7 +39,7 @@ export default function Login() {
         setToken(data.accessToken);
         setMessage(data.message);
         setUser(data.user);
-        redirect("/profile")
+        redirect("/profile");
       } else {
         const errorData = await response.json();
         setMessage(errorData.message);
@@ -57,34 +58,39 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </label>
-        <br />
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </label>
-        <br />
-        {message && <p style={{ color: 'red' }}>{message}</p>}
-        <button type="submit">Login</button>
-      </form>
-      <Link to={"/"}>Back</Link>
+      <div className="login-container">
+
+        <div className="login-card">
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">
+              Email
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </label>
+            <br />
+            <label htmlFor="password">
+              Password
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </label>
+            <br />
+            {message && <p style={{ color: 'red' }}>{message}</p>}
+            <button type="submit">Login</button>
+          </form>
+          <Link to={"/"}>Back</Link>
+        </div>
+      </div>
     </>
   );
 }

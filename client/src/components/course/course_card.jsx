@@ -7,6 +7,7 @@ export default function CourseCard(props){
     return(
         <div className="custom-card" onClick={redirectOnClick}>
             <h3>Title: {props.title}</h3>
+            <p>Course id: {props._id}</p>
             <p>Description: {props.description}</p>
             <p>Instructor: {props.instructor}</p>
         </div>

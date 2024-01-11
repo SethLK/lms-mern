@@ -6,6 +6,8 @@ export default function Logout(){
     const { setUser, userData } = useUser({});
     setUser(null);
     Cookies.remove('jwt_token');
+    Cookies.remove("user")
     const redirect = useNavigate()
-    redirect("/")
+    
+    redirect("/");
 }

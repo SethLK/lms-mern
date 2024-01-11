@@ -40,7 +40,8 @@ export default function Login() {
         const data = await response.json();
         setToken(data.accessToken);
         Cookies.set("jwt_token", data.accessToken, { expires: 7, secure: true, sameSite: 'Lax' });
-        
+        Cookies.set("user", JSON.stringify(data.user), {expires: 7, secure: true, sameSite: "Lax"})
+
         setMessage(data.message);
         setUser(data.user);
         redirect("/profile");

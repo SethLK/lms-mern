@@ -27,6 +27,7 @@ Router.get("/api/courses", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
 Router.get("/api/courses/:course_id", async (req, res) => {
     try {
         const course_id = req.params.course_id;

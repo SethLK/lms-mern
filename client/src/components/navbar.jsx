@@ -1,9 +1,9 @@
 import "../../public/navbar/style.css";
 import { Link } from "react-router-dom";
-import { useUser } from '../myhooks/UserContent';
+import Cookies from "js-cookie";
 
 export default function NavBar() {
-    const { userData } = useUser();
+    const userString = Cookies.get("user");
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function NavBar() {
                     </li>
                 </ul>
                 <ul>
-                    {userData ? (
+                    {userString ? (
                         <li>
                             <Link to={"/logout"}>Log out</Link>
                         </li>

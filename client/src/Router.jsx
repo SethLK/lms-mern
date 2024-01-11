@@ -1,6 +1,6 @@
 import App from "./App";
-import UserFetch from "./components/userFetch";
-import SingleCourse from "./components/singleCourse";
+// import SingleCourse from "./components/singleCourse";
+import CoursePage from "./pages/course/CoursePage";
 import GetLessonByCourse from "./components/getLessonByCourse";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -22,7 +22,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/courses/:course_id",
-        element: <SingleCourse />
+        element: <CoursePage />
     },
     {
         path: "/courses/:course_id/lessons/:lesson_id",

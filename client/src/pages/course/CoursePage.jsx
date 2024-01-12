@@ -1,11 +1,10 @@
 import NavBar from "../../components/navbar";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function CoursePage() {
     const [course, setCourse] = useState({});
-    const uri = location.pathname
-    console.log(uri)
+    const uri = location.pathname;
 
     useEffect(() => {
         async function fetchData() {
@@ -23,7 +22,7 @@ export default function CoursePage() {
         }
 
         fetchData();
-    }, []);
+    }, [uri]);
 
     return (
         <>
@@ -34,6 +33,14 @@ export default function CoursePage() {
                         <>
                             <h1>Title: {course.title}</h1>
                             <p>Description: {course.description}</p>
+                            <h2>Lessons:</h2>
+                            <ul>
+                                {course.lessons?.map((lesson, index) => (
+                                    <li key={index}>
+                                        <Link to={`${uri}/lessons/${lesson}`}>{`Lesson ${index + 1}`}</Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </>
                     )}
                 </div>

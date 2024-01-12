@@ -1,7 +1,7 @@
 import App from "./App";
 // import SingleCourse from "./components/singleCourse";
 import CoursePage from "./pages/course/CoursePage";
-import GetLessonByCourse from "./components/getLessonByCourse";
+import LessonPage from "./pages/lesson/LessonPage";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Profile from "./pages/Profile";
@@ -26,7 +26,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/courses/:course_id/lessons/:lesson_id",
-        element: <GetLessonByCourse />
+        element: <LessonPage />
     },
     {
         path: "/login",

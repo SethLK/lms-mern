@@ -15,7 +15,7 @@ export default function CourseCard(props) {
             <p>Course id: {props._id}</p>
             <p>Description: {props.description}</p>
             <p>Instructor: {props.instructor}</p>
-            {props.enrolled ? <p>Enrolled</p> : null}
+            {props.enrolled ? <p className="enroll">Enrolled</p> : <button>Enroll</button>}
         </div>
     );
 }

@@ -8,6 +8,8 @@ export default function Logout(){
     Cookies.remove('jwt_token');
     Cookies.remove("user")
     const redirect = useNavigate()
+
+    window.location = "/"
     
     redirect("/");
 }

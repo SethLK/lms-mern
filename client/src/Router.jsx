@@ -8,6 +8,8 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Logout from "./pages/logout";
 import Course from "./pages/Course";
+import Page from "./pages/page/PagePage";
+import IsAdmin from "./middleware/isAdmin";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -29,6 +31,10 @@ const Router = createBrowserRouter([
         element: <LessonPage />
     },
     {
+        path: "/courses/:course_id/lessons/:lesson_id/pages/:page_id",
+        element: <Page />
+    },
+    {
         path: "/login",
         element: <Login />
     },
@@ -47,6 +53,10 @@ const Router = createBrowserRouter([
     {
         path: "/logout",
         element: <Logout />
+    },
+    {
+        path: "/admin",
+        element: <IsAdmin />
     }
 
 ]);

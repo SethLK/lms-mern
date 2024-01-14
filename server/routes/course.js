@@ -148,4 +148,18 @@ Router.get('/api/courses/:id/lessons/:lesson_id/pages', async (req, res) => {
     }
 });
 
+Router.get('/api/courses/:id/lessons/:lesson_id/pages/:page_id', async (req, res) => {
+    const page_id = req.params.page_id;
+    try {
+        const page = await Page.findById(page_id);
+        if (!page) {
+            return res.status(404).json({ message: 'Page not found' });
+        }
+        res.status(200).json(page);
+    } catch (error) {
+        console.error('Error fetching pages', error);
+        res.status(500).json({ message: 'An error occurred while fetching pages' });
+    }
+});
+
 module.exports = Router;

@@ -1,16 +1,22 @@
 /* Basic styling for the card */
 .custom-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px; /* Custom width */
-    height: 200px; /* Custom height */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    margin: 10px
-  }
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  /* Custom width */
+  height: 200px;
+  /* Custom height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  margin: 10px
+}
 
-  /* Hover effect to simulate elevation */
-  .custom-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
+/* Hover effect to simulate elevation */
+.custom-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.enroll {
+  color: #ca2c2c;
+}

@@ -45,6 +45,8 @@ export default function Dashboard() {
                                     description={course.description}
                                     instructor={course.instructor.username}
                                     _id={course._id}
+                                    enrolled={user && course.enrolledUsers?.includes(user._id)}
+                                    edit={user && course.instructor._id === user._id}
                                 />
                             ))}
                         </div>

@@ -26,7 +26,7 @@ Router.post('/login', async (req, res) => {
     if (!isPasswordValid) return res.status(401).json({ success: false, message: "Wrong Password" });
 
     // Create and sign a JWT token
-    const accessToken = jwt.sign({ id: user._id, email: user.email }, config.secretKey, { expiresIn: '1h' });
+    const accessToken = jwt.sign({ id: user._id, email: user.email }, config.secretKey, { expiresIn: '7d' });
 
     res.status(200).json({
       user: {

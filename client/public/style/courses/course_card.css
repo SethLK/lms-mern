@@ -20,3 +20,8 @@
 .enroll {
   color: #ca2c2c;
 }
+
+.container{
+  display: flex;
+  justify-content: space-between;
+}

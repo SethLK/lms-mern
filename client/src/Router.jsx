@@ -10,6 +10,7 @@ import Logout from "./pages/logout";
 import Course from "./pages/Course";
 import Page from "./pages/page/PagePage";
 import IsAdmin from "./middleware/isAdmin";
+import EditPage from "./pages/edit/EditPage";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -17,6 +18,10 @@ const Router = createBrowserRouter([
     {
         path: "/",
         element: <App />
+    },
+    {
+        path: "/edit/:course_id",
+        element: <EditPage />
     },
     {
         path: "/courses",

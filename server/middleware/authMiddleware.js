@@ -5,7 +5,7 @@ const authenticateToken = (req, res, next) => {
     const token = req.header('Authorization');
 
     if (!token) {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized please Login" });
     }
 
     jwt.verify(token, config.secretKey, (err, user) => {

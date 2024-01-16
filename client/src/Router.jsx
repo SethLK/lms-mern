@@ -9,8 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import Logout from "./pages/logout";
 import Course from "./pages/Course";
 import Page from "./pages/page/PagePage";
-import IsAdmin from "./middleware/isAdmin";
+// import IsAdmin from "./middleware/isAdmin";
 import EditPage from "./pages/edit/EditPage";
+import AdminPanel from "./pages/admin/AdminPanel";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -61,7 +62,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <IsAdmin />
+        element: <AdminPanel />
     }
 
 ]);

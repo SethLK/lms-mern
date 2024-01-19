@@ -12,6 +12,7 @@ import Page from "./pages/page/PagePage";
 // import IsAdmin from "./middleware/isAdmin";
 import EditPage from "./pages/edit/EditPage";
 import AdminPanel from "./pages/admin/AdminPanel";
+import InstructorPanel from "./pages/instructor/InstructorPanel";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -63,6 +64,10 @@ const Router = createBrowserRouter([
     {
         path: "/admin",
         element: <AdminPanel />
+    },
+    {
+        path: "/instructor",
+        element: <InstructorPanel />
     }
 
 ]);

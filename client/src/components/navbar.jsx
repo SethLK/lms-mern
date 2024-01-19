@@ -1,4 +1,4 @@
-import "../../public/navbar/style.css";
+import "../style/navbar/style.css"
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 

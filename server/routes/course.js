@@ -76,6 +76,7 @@ Router.get("/api/lessons/:lesson_id", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
 Router.get("/api/pages/", async (req, res) => {
     try {
         const pages = await Page.find();
@@ -202,6 +203,34 @@ Router.post("/enroll", async (req, res) => {
     } catch (error) {
         console.error('Error enrolling user in course:', error);
         res.status(500).json({ success: false, message: 'An error occurred while enrolling user' });
+    }
+});
+
+Router.post("/create-course", async (req, res) => {
+    const { title, description, instructorId } = req.body;
+
+    try {
+        // Find the instructor using the provided instructorId
+        const instructor = await User.findById(instructorId);
+
+        if (!instructor) {
+            return res.status(404).json({ success: false, message: 'Instructor not found' });
+        }
+
+        // Create a new course with the found instructor
+        const newCourse = new Course({
+            title,
+            description,
+            instructor,
+        });
+
+        // Save the new course to the database
+        await newCourse.save();
+
+        res.status(200).json({ success: true, message: 'Course created successfully' });
+    } catch (error) {
+        console.error('Error creating course', error);
+        res.status(500).json({ success: false, message: 'An error occurred while creating the course' });
     }
 });
 

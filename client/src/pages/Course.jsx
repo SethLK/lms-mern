@@ -2,7 +2,7 @@
 
 import CourseCard from "../components/course/course_card";
 import { useState, useEffect } from "react";
-import "../../public/style/courses/courses.css";
+import "../style/courses/courses.css";
 import NavBar from "../components/navbar";
 import Cookies from "js-cookie";
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useUser } from '../myhooks/UserContent';
 import { Navigate } from 'react-router-dom';
 import NavBar from '../components/navbar';
-import "../../public/style/profile.css";
+import "../style/profile.css";
 import Cookies from 'js-cookie';
 
 export default function Profile() {

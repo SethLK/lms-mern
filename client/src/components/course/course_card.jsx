@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../../public/style/courses/course_card.css";
+import "../../style/courses/course_card.css";
 import Cookies from 'js-cookie';
 
 export default function CourseCard(props) {

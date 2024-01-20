@@ -5,13 +5,17 @@ import Cookies from "js-cookie";
 import MiniCourseCard from "../../components/course/course_card.mini";
 
 export default function InstructorPanel() {
+    const authToken = Cookies.get("jwt_token");
+
     const [courses, setCourses] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
     const userString = Cookies.get("user");
     const user = userString ? JSON.parse(userString) : null;
-    const userCourses = courses.filter(course => course.instructor._id === user._id);
+    const userCourses = courses.filter(course => course.instructor && course.instructor._id === user._id);
+
+    const [showCreateForm, setShowCreateForm] = useState(false); // Added state variable
 
     useEffect(() => {
         async function fetching() {
@@ -40,7 +44,7 @@ export default function InstructorPanel() {
         const courseData = {
             title: title,
             description: description,
-            instructorName: user._id,
+            instructorId: user._id,
         };
 
         try {
@@ -48,6 +52,7 @@ export default function InstructorPanel() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`,
                 },
                 body: JSON.stringify(courseData),
             });
@@ -55,15 +60,15 @@ export default function InstructorPanel() {
             if (response.ok) {
                 const newCourse = await response.json();
                 setCourses([...courses, newCourse]);
-                setShowCreateForm(false); // Hide the create form after successful submission
+                setShowCreateForm(false); // Set the state to hide the create form
                 // You may add additional logic or feedback here
             } else {
                 console.error("Error creating course", response.statusText);
-                // Handle error or provide feedback to the user
+                const err = await response.json();
+                setMessage(err.message);
             }
         } catch (error) {
             console.error("Error creating course", error);
-            // Handle error or provide feedback to the user
         }
     };
 
@@ -74,39 +79,41 @@ export default function InstructorPanel() {
                 <h1>Instructor Panel</h1>
                 <div className="create-course">
                     <div className="createSession" id="createSession">
-                        {message && <p style={{ color: 'red' }}>{message}</p>}
-                        <form onSubmit={handleSubmit}>
-
-                            <label htmlFor="title">Title
-                                <input
-                                    type="text"
-                                    name="title"
-                                    id="course_title"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="description">Description
+                        {showCreateForm && (
+                            <form onSubmit={handleSubmit}>
+                                <label htmlFor="title">Title
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        id="course_title"
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                        required
+                                    />
+                                </label>
                                 <br />
-                                <textarea
-                                    name="description"
-                                    id="course_description"
-                                    cols="30"
-                                    rows="4"
-                                    placeholder="Description max 100"
-                                    maxLength="100"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                ></textarea>
-                            </label>
-                            <br />
 
-                            <button type="submit">Create</button>
-                        </form>
+                                <label htmlFor="description">Description
+                                    <br />
+                                    <textarea
+                                        name="description"
+                                        id="course_description"
+                                        cols="30"
+                                        rows="4"
+                                        placeholder="Description max 100"
+                                        maxLength="100"
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        required
+                                    ></textarea>
+                                </label>
+                                <br />
+
+                                <button type="submit">Create</button>
+                            </form>
+                        )}
                     </div>
-                    <button>Create Course</button>
+                    <button onClick={() => setShowCreateForm(!showCreateForm)}>Toggle Create Form</button>
                 </div>
                 <div className="flex-container">
                     <div className="your-courses">
@@ -130,4 +137,3 @@ export default function InstructorPanel() {
         </>
     );
 }
-

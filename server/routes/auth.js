@@ -26,7 +26,7 @@ Router.post('/login', async (req, res) => {
     if (!isPasswordValid) return res.status(401).json({ success: false, message: "Wrong Password" });
 
     // Create and sign a JWT token
-    const accessToken = jwt.sign({ id: user._id, email: user.email }, config.secretKey, { expiresIn: '7d' });
+    const accessToken = jwt.sign({ id: user._id, username: user.username, email: user.email, role: user.role }, config.secretKey, { expiresIn: '7d' });
 
     res.status(200).json({
       user: {
@@ -60,28 +60,28 @@ Router.post('/register', async (req, res) => {
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    
+
     // Create a new user
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
     });
-    
+
     // Save the user to the database
     await newUser.save();
 
     const accessToken = jwt.sign({ id: newUser._id, email: newUser.email }, config.secretKey, { expiresIn: '1h' });
 
-    res.status(201).json({ 
+    res.status(201).json({
       user: {
         username: newUser.username,
         email: newUser.email,
       },
-      success: true, 
+      success: true,
       message: "User registered successfully",
       accessToken
-     });
+    });
   } catch (err) {
     console.error("Error at registration", err);
     res.status(500).json({ success: false, message: "Internal server error" });

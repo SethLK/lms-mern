@@ -1,3 +1,4 @@
+const authMiddleWare = require("../middleware/authMiddleware");
 const Course = require("../model/Course");
 const Lesson = require("../model/Lesson");
 const Page = require("../model/Page");
@@ -206,12 +207,12 @@ Router.post("/enroll", async (req, res) => {
     }
 });
 
-Router.post("/create-course", async (req, res) => {
-    const { title, description, instructorId } = req.body;
-
+Router.post("/api/create-course", authMiddleWare, async (req, res) => {
+    const { title, description} = req.body;
+    
     try {
         // Find the instructor using the provided instructorId
-        const instructor = await User.findById(instructorId);
+        const instructor = await User.findById(req.user.id);
 
         if (!instructor) {
             return res.status(404).json({ success: false, message: 'Instructor not found' });
@@ -219,13 +220,14 @@ Router.post("/create-course", async (req, res) => {
 
         // Create a new course with the found instructor
         const newCourse = new Course({
-            title,
+            title: title,
             description,
             instructor,
         });
 
         // Save the new course to the database
         await newCourse.save();
+        console.log(newCourse)
 
         res.status(200).json({ success: true, message: 'Course created successfully' });
     } catch (error) {

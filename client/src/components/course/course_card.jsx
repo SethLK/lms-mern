@@ -10,6 +10,7 @@ export default function CourseCard(props) {
     const user = userString ? JSON.parse(userString) : null;
     const navigate = useNavigate();
     const [isEnrolled, setIsEnrolled] = useState(props.enrolled);
+    const authToken = Cookies.get("jwt_token");
 
     const handleEnroll = async () => {
         try {
@@ -18,6 +19,7 @@ export default function CourseCard(props) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${authToken}`,
                     },
                     body: JSON.stringify({
                         courseId: props._id,

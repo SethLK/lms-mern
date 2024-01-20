@@ -77,6 +77,7 @@ export default function InstructorPanel() {
             <NavBar />
             <div className="body">
                 <h1>Instructor Panel</h1>
+                {message && <p style={{ color: 'red' }}>{message}</p>}
                 <div className="create-course">
                     <div className="createSession" id="createSession">
                         {showCreateForm && (

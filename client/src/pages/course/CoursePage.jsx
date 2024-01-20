@@ -1,9 +1,12 @@
 import NavBar from "../../components/navbar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function CoursePage() {
     const [course, setCourse] = useState({});
+    const userString = Cookies.get("user")
+    const userData = JSON.parse(userString);
     const uri = location.pathname;
 
     useEffect(() => {
@@ -32,6 +35,9 @@ export default function CoursePage() {
                     {course && (
                         <>
                             <h1>Title: {course.title}</h1>
+                            {userData && userData.role === "instructor" && (
+                                <Link>Add Lessons</Link>
+                            )}
                             <p>Description: {course.description}</p>
                             <h2>Lessons:</h2>
                             <ul>

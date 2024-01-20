@@ -165,11 +165,12 @@ Router.get('/api/courses/:id/lessons/:lesson_id/pages/:page_id', async (req, res
     }
 });
 
-Router.post("/enroll", async (req, res) => {
+Router.post("/enroll", authMiddleWare, async (req, res) => {
     try {
-        const { courseId, user_id } = req.body;
+        const { courseId } = req.body;
         // const user = await User.findOne({ username: name }, '_id');
-        const user = await User.findOne({ _id: user_id });
+        // const user = await User.findOne({ _id: user_id });
+        const user = await User.findById(req.user.id);
         const course = await Course.findById(courseId);
 
         if (!user) {
@@ -208,8 +209,8 @@ Router.post("/enroll", async (req, res) => {
 });
 
 Router.post("/api/create-course", authMiddleWare, async (req, res) => {
-    const { title, description} = req.body;
-    
+    const { title, description } = req.body;
+
     try {
         // Find the instructor using the provided instructorId
         const instructor = await User.findById(req.user.id);
@@ -227,7 +228,7 @@ Router.post("/api/create-course", authMiddleWare, async (req, res) => {
 
         // Save the new course to the database
         await newCourse.save();
-        console.log(newCourse)
+        console.log(newCourse);
 
         res.status(200).json({ success: true, message: 'Course created successfully' });
     } catch (error) {

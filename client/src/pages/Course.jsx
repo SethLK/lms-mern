@@ -35,6 +35,7 @@ export default function Course() {
             <NavBar />
             <div className="body">
                 <h1>Courses</h1>
+                
                 <div className="courses">
                     {courses.map((course) => (
                         <CourseCard

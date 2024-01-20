@@ -14,3 +14,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.custom-card > h3,p{
+  padding: 10px;
+}

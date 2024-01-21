@@ -2,6 +2,7 @@ const express = require("express");
 const Auth = require("./routes/auth.js");
 const Course = require("./routes/course.js");
 const User = require("./routes/user.js");
+const Lesson = require("./routes/lesson.js")
 require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require('body-parser');
@@ -12,7 +13,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(Auth,
     Course,
-    User);
+    User,
+    Lesson);
 
 app.get("/", (req, res) => {
     res.send("Hello There");

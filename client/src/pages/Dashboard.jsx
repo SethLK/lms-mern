@@ -2,10 +2,14 @@ import NavBar from "../components/navbar";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import CourseCard from "../components/course/course_card";
+import { Navigate } from 'react-router-dom';
 
 export default function Dashboard() {
     const [courses, setCourses] = useState([]);
     const userString = Cookies.get("user");
+    if (!userString) {
+        return <Navigate to="/login" />;
+      }
     const user = userString ? JSON.parse(userString) : null;
     const userCourses = courses.filter(course => course.instructor._id === user._id);
     const enrolledCourses = courses.filter(course => course.enrolledUsers?.includes(user._id));

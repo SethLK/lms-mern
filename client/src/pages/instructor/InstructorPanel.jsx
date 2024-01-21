@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 import NavBar from "../../components/navbar";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
@@ -12,6 +12,9 @@ export default function InstructorPanel() {
     const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
     const userString = Cookies.get("user");
+    if (!userString) {
+        return <Navigate to="/login" />;
+      }
     const user = userString ? JSON.parse(userString) : null;
     const userCourses = courses.filter(course => course.instructor && course.instructor._id === user._id);
 

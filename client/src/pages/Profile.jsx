@@ -1,12 +1,10 @@
 import React from 'react';
-import { useUser } from '../myhooks/UserContent';
 import { Navigate } from 'react-router-dom';
 import NavBar from '../components/navbar';
 import "../style/profile.css";
 import Cookies from 'js-cookie';
 
 export default function Profile() {
-  const { userData } = useUser();
   const userString = Cookies.get("user");
   
   if (!userString) {

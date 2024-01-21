@@ -2,12 +2,19 @@ import NavBar from "../../components/navbar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import "./course.css"
 
 export default function CoursePage() {
     const [course, setCourse] = useState({});
-    const userString = Cookies.get("user")
+    const [lessonTitle, setLessonTitle] = useState("");
+    const [showLessonForm, setShowLessonForm] = useState(false);
+    const userString = Cookies.get("user");
     const userData = JSON.parse(userString);
     const uri = location.pathname;
+
+    const toggleLessonForm = () => {
+        setShowLessonForm(!showLessonForm);
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -27,6 +34,8 @@ export default function CoursePage() {
         fetchData();
     }, [uri]);
 
+    
+
     return (
         <>
             <NavBar />
@@ -36,7 +45,23 @@ export default function CoursePage() {
                         <>
                             <h1>Title: {course.title}</h1>
                             {userData && userData.role === "instructor" && (
-                                <Link>Add Lessons</Link>
+                                <>
+                                    <button onClick={toggleLessonForm}>Add Lessons</button>
+                                    {showLessonForm && (
+                                        <form>
+                                            <h1>Add Lesson Form</h1>
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                id="lesson_title"
+                                                value={lessonTitle}
+                                                onChange={(e) => setLessonTitle(e.target.value)}
+                                                placeholder="Enter Lesson Title"
+                                            />
+                                            <button>Add</button>
+                                        </form>
+                                    )}
+                                </>
                             )}
                             <p>Description: {course.description}</p>
                             <h2>Lessons:</h2>

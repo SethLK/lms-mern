@@ -8,11 +8,11 @@ const express = require("express");
 
 const Router = express.Router();
 
-Router.post("/api/courses/:course_id", authMiddleWare, async (req, res) => {
+Router.post("/api/courses/:course_id/lessons", authMiddleWare, async (req, res) => {
     try {
         const { title } = req.body;
         const course_id = req.params.course_id;
-        const instructor = User.findById(req.user.id);
+        const instructor = await User.findById(req.user.id);
 
         if (!instructor) {
             return res.status(404).json({ success: false, message: 'Instructor not found' });

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 export default function LessonPage() {
     const [lesson, setLesson] = useState({});
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     const uri = location.pathname;
 
     useEffect(() => {

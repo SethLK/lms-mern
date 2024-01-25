@@ -1,11 +1,14 @@
 import NavBar from "../../components/navbar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function LessonPage() {
     const [lesson, setLesson] = useState({});
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [pageForm, showpageForm] = useState(false);
     const uri = location.pathname;
 
     useEffect(() => {
@@ -31,6 +34,18 @@ export default function LessonPage() {
             <NavBar />
             <div className="body">
                 <h1>{lesson.title}</h1>
+                <button onClick={() => showpageForm(!pageForm)}>
+                    Add Lessons
+                </button>
+                {pageForm && (
+                    <>
+                        <form action="">
+                            <input type="text" placeholder="page-title" name="title" value={title}/>
+                            <ReactQuill theme="snow" value={content} onChange={setContent} />;
+                            <button type="submit">Add</button>
+                        </form>
+                    </>
+                )}
                 {lesson.pages?.map((page, index) => (
                     <li key={index}>
                         <Link to={`${uri}/pages/${page}`}>{`Page ${index + 1}`}</Link>

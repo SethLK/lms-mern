@@ -1,12 +1,13 @@
 .custom-card-mini {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    /* Custom width */
-    max-height: 200px;
-    /* Custom height */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    margin: 10px
-  }
+  
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  /* Custom width */
+  max-height: 200px;
+  /* Custom height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  margin: 10px
+}

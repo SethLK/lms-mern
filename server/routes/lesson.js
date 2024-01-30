@@ -121,16 +121,19 @@ Router.get('/api/courses/:id/lessons/:lesson_id', async (req, res) => {
 Router.get('/api/courses/:id/lessons/:lesson_id/pages', authMiddleWare, async (req, res) => {
     const lesson_id = req.params.lesson_id;
     try {
-        const pages = await Page.findById(lesson_id)
-        if (!pages) {
+        const lesson = await Lesson.findById(lesson_id);
+        if (!lesson) {
             return res.status(404).json({ error: "lesson not found" });
         }
+
+        const pages = await Page.find({ _id: { $in: lesson.pages } });
         res.status(200).json({ pages });
     } catch (error) {
         console.error('Error fetching pages', error);
         res.status(500).json({ message: 'An error occurred while fetching pages' });
     }
 });
+
 
 Router.get('/api/courses/:id/lessons/:lesson_id/pages/:page_id', async (req, res) => {
     const page_id = req.params.page_id;

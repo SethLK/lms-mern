@@ -9,7 +9,7 @@ export default function Dashboard() {
     const userString = Cookies.get("user");
     if (!userString) {
         return <Navigate to="/login" />;
-      }
+    }
     const user = userString ? JSON.parse(userString) : null;
     const userCourses = courses.filter(course => course.instructor._id === user._id);
     const enrolledCourses = courses.filter(course => course.enrolledUsers?.includes(user._id));
@@ -42,7 +42,7 @@ export default function Dashboard() {
                     <>
                         <h1>Your Courses</h1>
                         <div className="courses">
-                            {userCourses.map((course) => (
+                            {Array.isArray(userCourses) && userCourses.slice().reverse().map((course) => (
                                 <CourseCard
                                     key={course._id}
                                     title={course.title}
@@ -53,6 +53,7 @@ export default function Dashboard() {
                                     edit={user && course.instructor._id === user._id}
                                 />
                             ))}
+
                         </div>
                     </>
                 )}

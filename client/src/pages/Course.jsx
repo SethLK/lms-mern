@@ -35,9 +35,9 @@ export default function Course() {
             <NavBar />
             <div className="body">
                 <h1>Courses</h1>
-                
+
                 <div className="courses">
-                    {courses.map((course) => (
+                    {Array.isArray(courses) && courses.slice().reverse().map((course) => (
                         <CourseCard
                             key={course._id}
                             title={course.title}
@@ -45,6 +45,7 @@ export default function Course() {
                             instructor={course.instructor.username}
                             _id={course._id}
                             enrolled={user && course.enrolledUsers?.includes(user._id)}
+                            edit={user && course.instructor._id === user._id}
                         />
                     ))}
                 </div>

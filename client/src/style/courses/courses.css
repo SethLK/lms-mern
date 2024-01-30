@@ -1,5 +1,5 @@
 .courses {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Repeat 5 columns with equal width */
-    gap: 16px; /* Adjust the gap between columns */
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent courses from wrapping to the next line */
 }
